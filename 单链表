@@ -1,0 +1,96 @@
+#include<string>
+#include<iostream>
+using namespace std;
+struct Node
+{
+    int data;
+    struct Node* next;
+
+};
+Node* createLink(int size)//创造链表
+{
+    Node* p, * q;
+    Node* head = (Node*)malloc(sizeof(Node));
+    p = head;
+    for (int i = 0; i < size ; ++i)
+    {
+        q = new Node;
+        q->next = nullptr;
+        q->data = i;
+        p->next = q;
+        p = q;
+    }
+    return head;
+}
+void display(Node* head)//遍历
+{
+    Node* p;
+    p = head;
+    while (p->next != nullptr)
+    {
+        cout << p->data << endl;
+        p = p->next;
+    }
+}
+void insertHead(Node*head,int data)//头插
+
+{
+    if (head == nullptr)
+    {
+        cout << "head is nullptr" << endl;
+    }
+    Node* p = (Node*)malloc(sizeof(Node));
+    p->data = data;
+    p->next = head->next;
+    head->next = p;
+}
+void insertTail(Node* head, int data)//尾插
+{
+    if (head == nullptr)
+    {
+        cout << "head is nullptr" << endl;
+        return;
+    }
+    Node* tail = head;
+    while (tail->next != nullptr)
+    {
+        tail = tail->next;
+    }
+    Node* p = (Node*)malloc(sizeof(Node));
+    p->data = data;
+    tail->next = p;
+
+
+}
+void delete_head(Node* head)//头删
+{
+    if (head == nullptr)
+    {
+        cout << "head is nullptr" << endl;
+        return;
+    }
+
+    Node* p = head->next;
+    head->next = p->next;
+    delete p;
+
+}
+void delete_tail(Node* head)//尾删
+
+{
+    Node* tail = head;
+    Node* tailBefore = nullptr;//指针使用一定要赋初值，我就是忘了编译器报错
+    while (tail->next != nullptr)
+    {
+        tailBefore = tail;
+        tail = tail->next;
+    }
+    tailBefore->next = nullptr;//设置一个tail之前的指针，不然display会打印一个野
+    delete tail;
+}
+int main()
+{
+    Node* head = createLink(5);
+    delete_tail(head);
+    display(head);
+}
