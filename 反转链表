@@ -1,4 +1,4 @@
-void displayLink(Node* head,stack *stack)//遍历
+void displayLink(Node* head,stack *stack)//链表元素入栈
 {
     Node* p;
     p = head;
@@ -9,19 +9,12 @@ void displayLink(Node* head,stack *stack)//遍历
     }
 }
 
-void displayLink1(stack* stack)
-{
-    display(stack);
-
-}
-
-int main()//利用栈的特性
-{
-	  Node* p = createLink(5);
+int main()//利用单链表和栈的函数
+{   
+    Node* p = createLink(5);
     stack* q = new stack;
     initStack(q);
     displayLink(p,q);
-    displayLink1(q);
-
-	return 0;
+    display(q);
+    return 0;
 }
