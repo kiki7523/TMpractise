@@ -1,0 +1,50 @@
+#include<string>
+#include<iostream>
+#define maxSize 50
+using namespace std;
+
+struct stack {
+	int data[maxSize];
+	int top;//栈顶指针
+};
+
+void initStack(stack* data)
+{
+	data->top = -1;//初始化栈顶指针
+}
+bool stackEmpty(stack* data)
+{
+	return data->top == -1;
+}
+bool stackFull(stack* data)
+{
+	return data->top == maxSize;
+}
+void pushStack(stack* data,int stackData)//入
+{
+	if (stackFull(data))
+	{
+		return;
+	}
+	data->data[++data->top]= stackData;
+}
+void popStack(stack* data)//出
+{
+	if (stackEmpty(data))
+	{
+		return;
+	}
+	data->data[data->top--] = 0;
+}	
+void display(stack* data)
+{	
+	for (;data->top>=0;data->top--)
+	{		
+		cout << data->data[data->top] << endl;
+	}
+}
+int main()
+{
+
+
+}
