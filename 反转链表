@@ -9,7 +9,7 @@ void displayLink(Node* head,stack *stack)//链表元素入栈
     }
 }
 
-int main()//利用单链表和栈的函数
+int main()//利用单链表和栈的函数，不改变链表结构
 {   
     Node* p = createLink(5);
     stack* q = new stack;
@@ -18,3 +18,18 @@ int main()//利用单链表和栈的函数
     display(q);
     return 0;
 }
+
+int main()//改变链表结构
+{   
+    Node* cur = createLink(5);
+    Node* pre=nullptr ;
+    while (cur != nullptr)
+    {
+        Node* tmp = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = tmp;
+    }
+    display(pre);//不用cur的是因为 cur和tmp都指向nullptr
+	return 0;
+    }
