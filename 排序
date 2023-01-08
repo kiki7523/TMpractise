@@ -1,0 +1,45 @@
+int* bubbleSort(int* arr,int n)//冒泡
+{
+	int  tmp=0;
+	for (int i = 0; i < n; i++)//最外层决定循环的次数，因为是每次循环确定一个数字的位置
+	{
+		for (int j = 0; j<n - i-1; j++)//n-1是因为双指针j+1到最后不会数组越界 和 -i因为是每次循环已确定值的数量刚好跟和i的值一样
+		{
+			if (arr[j] > arr[j+1])
+			{
+				tmp = arr[j+1];
+				arr[j+1] = arr[j];
+				arr[j] = tmp;
+			}
+		}
+	}
+	
+	return arr;
+}
+
+int partition(int arr[], int low, int count)
+{
+	int key = arr[count];//决定基准
+	int i = low - 1;
+
+	for (int j = low; j < count; j++)
+	{
+		// 比key小的，全部换到前面去
+		if (arr[j] <= key)
+			swap(arr[j], arr[++i]);
+	}
+	// 此时，i指向的元素一定小于等于pivot
+	swap(arr[count], arr[i + 1]);//i+1就是key正确的位置
+	return i + 1;
+}
+
+
+void quickSort(int arr[], int low, int count)//快排 count是数组个数 low是数组第一个元素
+{
+	if (low < count)//在不断递归的过程中传入的low在增加，count在减少 所以作为边界条件
+	{
+		int mid = partition(arr, low, count);//确定左右两边的边界
+		quickSort(arr, low, mid - 1);
+		quickSort(arr, mid + 1, count);
+	}
+}
