@@ -1,0 +1,25 @@
+int  rotateArr(int* arr, int low, int high)//特殊情况需要优化
+{
+
+
+	if (low + 1 != high)
+	{
+		int mid = (low + high) / 2;
+		if (arr[mid] >= arr[low])
+		{
+			low = mid;
+			return rotateArr(arr, low, high);
+		}
+		else if (arr[mid] <= arr[high])
+		{
+			high = mid;
+			return rotateArr(arr, low, high);
+		}
+
+
+	}
+	else
+	{
+		return high;
+	}
+}
