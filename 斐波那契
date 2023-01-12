@@ -1,0 +1,31 @@
+int fibonacci(int n)
+{	
+  if(n<=0)
+  {
+    return 0;
+  }
+	if(n==1)
+  {
+  return 1;
+  }
+	return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+
+long long fibonacci1(int n)//思路是f（0）+f（1）=f（2） f（1）+f（2）=f（3）一直递推
+{
+	int arr[2] = { 0,1 };
+	if (n < 2)
+	{
+		return arr[n];
+	}
+	long long i=0, j=1,k=0;//i是f0， j是f1
+	for (int count = 2; count <= n; count++)
+	{
+		 k = i + j;
+		 i = j;
+		 j = k;
+
+	}
+	return k;
+}
