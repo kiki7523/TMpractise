@@ -1,19 +1,15 @@
 int* bubbleSort(int* arr,int n)//冒泡
 {
-	int  tmp=0;
-	for (int i = 0; i < n; i++)//最外层决定循环的次数，因为是每次循环确定一个数字的位置
-	{
-		for (int j = 0; j<n - i-1; j++)//n-1是因为双指针j+1到最后不会数组越界 和 -i因为是每次循环已确定值的数量刚好跟和i的值一样
-		{
-			if (arr[j] > arr[j+1])
-			{
-				tmp = arr[j+1];
-				arr[j+1] = arr[j];
-				arr[j] = tmp;
-			}
-		}
-	}
-	
+	 for (int i = lenth; i > 1; i--)//9个排9次,但最后一次只有一个元素所以不需要所以i>1,j=1
+    {
+        for (int j = 1; j < i; j++)
+        {
+            if (arr[j-1] > arr[j])
+            {
+                swap(arr[j], arr[j -1]);
+            }
+        }
+    }
 	return arr;
 }
 
@@ -26,7 +22,7 @@ int partition(int arr[], int low, int count)
 	{
 		// 比key小的，全部换到前面去
 		if (arr[j] <= key)
-			swap(arr[j], arr[++i]);//arry[i]指向的位置是＜key,arry[++i]就大于key,发现更小arr[j],就把大于key的arr[++i]互换
+			swap(arr[j], arr[++i]);//arry[i]指向的位置是最新＜key,arry[++i]就大于key,发现更小arr[j],就把大于key的arr[++i]互换
 	}
 	// 此时，i指向的元素一定小于等于pivot
 	swap(arr[count], arr[i + 1]);//i+1就是key正确的位置
