@@ -1,0 +1,33 @@
+class CQueue {
+public:
+    CQueue() {
+        st1=st2=0;
+
+    }
+     	int s1[100];//两个stack第一个是s1用来接受数据第二个s2用来输出数据
+        int s2[100];
+        int st1;//栈顶指针
+        int st2;
+    
+    void  pushQueue(int value) { 
+        s1[st1++]=value;
+    }
+    
+    int popQueue() {
+       if(st2==0)
+       {
+           if(st1==0)
+           {
+               return -1; //当两个都为空则队列为空
+           }
+           else
+           {
+               while(st1)//当s2为空才能s1的数据导到s2保证形成队列的先进先出
+               {
+	       s2[st2++]=s1[--st1];
+            }
+           }
+       }
+       return s2[--st2];
+    }
+};
