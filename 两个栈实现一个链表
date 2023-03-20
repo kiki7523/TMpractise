@@ -1,61 +1,51 @@
-#include"linklist.h"
-#include"stack.h"
+#include<string>
+#include<iostream>
+#define maxSize 50
+using namespace std;
 
-void moveStack(stack* data, stack* data1);//前置声明
-void pushQueue(stack* data,int queuedata)
-{       
-    pushStack(data, queuedata);//这里不检查是因为pushstack()已经检查栈满
-}
+struct Stack {
+	int _data[maxSize];
+	int _top;//栈顶指针
+};
 
-void popQueue(stack* data, stack* data1)//出队
+void initStack(Stack* sta)
 {
-    if (stackEmpty(data1))
-    {
-        moveStack(data, data1);
-        cout << data1->data[data1->top] << endl;
-        popStack(data1);
-
-      
-    }
-    else
-    {
-        cout << data1->data[data1->top] << endl;
-        popStack(data1);
-    }
+	sta->_top = 0;//初始化栈顶指针，栈顶元素的上面一个元素
 }
-
-void moveStack(stack* data,stack*data1)//当栈2为空时，从栈一到栈二
+bool stackEmpty(Stack* sta)
 {
-    if (stackEmpty(data))
-    {
-        cout << "can't move" << endl;
-        return;
-    }
-    for (; data->top >= 0; data->top--)
-    {
-        pushStack(data1, data->data[data->top]);
-    }
+	return sta->_top == 0;
 }
-
-int main()
-{   
-    stack* p = (stack*)malloc(sizeof(stack));
-    stack* q = new stack;
-    initStack(p);//初始化栈
-    initStack(q);
-    for(int i=0;i<5;i++)
-    {
-        pushQueue(p, i);//入队
-    }
-    popQueue(p, q);//出队
-    popQueue(p, q);
-    popQueue(p, q);
-    popQueue(p, q);
-    popQueue(p, q);
-    popQueue(p, q);
-
-    free(p);
-    delete q;
-
-	return 0;
+bool stackFull(Stack* sta)
+{
+	return sta->_top >=maxSize;
+}
+void pushStack(Stack* sta, int stackData)//入
+{
+	if (stackFull(sta))
+	{
+		cout << "stack is full" << endl;
+		return;
+	}
+	sta->_data[sta->_top++] = stackData;
+}
+void popStack(Stack* sta)//出
+{
+	if (stackEmpty(sta))
+	{
+		cout << "stack is empty" << endl;
+		return;
+	}
+	sta->_data[--sta->_top] = 0;
+}
+void display(Stack sta)
+{
+	for (; sta._top> 0; sta._top--)
+	{
+		cout << sta._data[sta._top-1] << endl;
+	}
+}
+int stackLenth(Stack* sta)
+{
+	return sta->_top;
 }
