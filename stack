@@ -10,15 +10,15 @@ struct Stack {
 
 void initStack(Stack* sta)
 {
-	sta->_top = -1;//初始化栈顶指针
+	sta->_top = 0;//初始化栈顶指针
 }
 bool stackEmpty(Stack* sta)
 {
-	return sta->_top == -1;
+	return sta->_top == 0;
 }
 bool stackFull(Stack* sta)
 {
-	return sta->_top == maxSize;
+	return sta->_top >=maxSize;
 }
 void pushStack(Stack* sta, int stackData)//入
 {
@@ -27,7 +27,7 @@ void pushStack(Stack* sta, int stackData)//入
 		cout << "stack is full" << endl;
 		return;
 	}
-	sta->_data[++sta->_top] = stackData;
+	sta->_data[sta->_top++] = stackData;
 }
 void popStack(Stack* sta)//出
 {
@@ -36,15 +36,20 @@ void popStack(Stack* sta)//出
 		cout << "stack is empty" << endl;
 		return;
 	}
-	sta->_data[sta->_top--] = 0;
+	sta->_data[--sta->_top] = 0;
 }
 void display(Stack sta)
 {
-	for (; sta._top >= 0; sta._top--)
+	for (; sta._top> 0; sta._top--)
 	{
-		cout << sta._data[sta._top] << endl;
+		cout << sta._data[sta._top-1] << endl;
 	}
+}
+int stackLenth(Stack* sta)
+{
+	return sta->_top;
 }
 int main()
 {
+
 }
