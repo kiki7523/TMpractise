@@ -10,7 +10,7 @@ struct Stack {
 
 void initStack(Stack* sta)
 {
-	sta->_top = 0;//初始化栈顶指针
+	sta->_top = 0;//初始化栈顶指针，栈顶指针指向栈顶元素上一个元素
 }
 bool stackEmpty(Stack* sta)
 {
