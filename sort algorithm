@@ -1,12 +1,12 @@
 int* bubbleSort(int* arr,int n)//冒泡
 {
-	 for (int i = lenth; i > 1; i--)//9个排9次,但最后一次只有一个元素所以不需要所以i>1,j=1
+	 for (int i = lenth; i > 1; i--)//冒泡排序原理是每两个相邻元素相互比较，每轮比较，确定一个数的位置
     {
-        for (int j = 1; j < i; j++)
+        for (int j = 0; j < i-1; j++)//因为每比较一轮确定一个正确位置到最后一轮只有一个元素不用比 所以i>1
         {
-            if (arr[j-1] > arr[j])
+            if (arr[j] > arr[j+1]//因为是数组下标从0开始，j < i-1 不然就越界
             {
-                swap(arr[j], arr[j -1]);
+                swap(arr[j], arr[j +1]);
             }
         }
     }
