@@ -1,0 +1,44 @@
+#include<string>
+#include<iostream>
+#include<set>
+#include<stack>
+#include<unordered_set>
+#include<vector>
+#include<sstream>
+#include<map>
+using namespace std;
+
+int main()
+{
+    int n, m = 0;
+    list<int> num;
+    for (int i = 0; i < n; i++)//n填多久就有多少个元素
+    {
+        num.push_back(i);
+    }
+    auto it = num.begin();
+    int ret;
+    while (!num.empty())//当他==0 也没问题 因为已经先保存了ret的值在循环中 
+    {
+        for (int i = 0; i < m - 1; i++)// 假如m=3 m-1 循环2次 迭代器指向第一个元素 从一开始+2次刚好是3
+        {
+            it++;
+            if (it == num.end())
+            {
+                it = num.begin();//模拟轮盘过程到了末尾就重来
+            }
+        }
+        ret = *it;//当for结束的时候,他一定找到了那个要删除的元素,事实上最后一个要删除的元素就是最后一个元素
+        it = num.erase(it);//erase之后 ，迭代器自动指向了下一个元素。而对于入参中的iter，所指的地址已经被销毁，所以写的时候，应该注意加上前面的iter =
+        
+        if (it == num.end())//当他指向下一个元素是end时 说明已经到头需要重新循环 end是之下末尾后面一个元素 符合题目条件删了之后重新计数,不等于就正常进行
+        {
+            it = num.begin();
+        }
+    }
+    return ret;
+
+
+}
+
+	
