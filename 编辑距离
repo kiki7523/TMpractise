@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+
+      int arr[word1.size()+1][word2.size()+1];
+      //创建动态表,根据word1,word2字符长度 建立动态表,其中 [i][j]储存word1第i个字符要匹配到word2第j个字符操作次数
+      // [0][0]确定了是0 双方字符长度都为空 比较次数为0 已经都占了一个位置 所以是+1
+      for(int i=0;i<=word1.size();++i)//初始化动态表 如果是word1字符数为i word2字符数为0次数就是操作次数i 
+      { 
+          arr[i][0]=i;
+      }
+       for(int j=0;j<=word2.size();++j)// 如果是word1字符数为0 word2字符数为j次数就是操作次数j
+      {
+          arr[0][j]=j;
+      }
+     
+
+      for(int i=1;i<=word1.size();++i)//i=1 j=1 因为[0][0]已经确定 因为从1开始 所以是<= 保证次数遍历完两个字符串
+      {
+          for(int j=1;j<=word2.size();++j)
+          {
+              if(word1[i-1]==word2[j-1])//判断最后一个字符相等否,相等就不需要比较 次数不变 去掉相等字符 剩下要比较的字符
+              {
+                  arr[i][j]=arr[i-1][j-1];
+              }
+              else
+              {
+                  arr[i][j]=min({arr[i-1][j-1],arr[i-1][j],arr[i][j-1]})+1;//比较三个方向最小值 不相等无论如何都要操作所以+1
+                  //循环确认操作次数  i==1 word1第1个字符去匹配 确定操作次数之后依次确定word1每一轮与word2[j]
+              }
+          }
+      }
+      return arr[word1.size()][word2.size()];//储存次数
+    }
+    
+};
